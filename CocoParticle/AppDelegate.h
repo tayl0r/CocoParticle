@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParticleList.h"
 
 @class RootViewController;
 
-@interface AppDelegate : NSObject <UIApplicationDelegate> {
-	UIWindow			*window;
-	RootViewController	*viewController;
+@interface AppDelegate : NSObject <UIApplicationDelegate, UISplitViewControllerDelegate> {
+	UIWindow* window;
+    UISplitViewController* splitVC;
+	RootViewController* mainVC;
+    ParticleList* leftVC;
 }
 
 @property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, readonly, assign) RootViewController* mainVC;
 
 @end

@@ -75,6 +75,7 @@
 	
 	// Since this method should return YES in at least 1 orientation, 
 	// we return YES only in the Portrait orientation
+    return YES;
 	return ( interfaceOrientation == UIInterfaceOrientationPortrait );
 	
 #elif GAME_AUTOROTATION == kGameAutorotationUIViewController
@@ -84,7 +85,7 @@
 	// Sample: Autorotate only in landscpe mode
 	//
 	// return YES for the supported orientations
-	
+	return YES;
 	return ( UIInterfaceOrientationIsLandscape( interfaceOrientation ) );
 	
 #else
