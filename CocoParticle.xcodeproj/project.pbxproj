@@ -122,9 +122,11 @@
 		016F128B13CAA5EF00B1B6BE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F128A13CAA5EF00B1B6BE /* AppDelegate.m */; };
 		016F128E13CAA5EF00B1B6BE /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F128D13CAA5EF00B1B6BE /* RootViewController.m */; };
 		016F129113CAA5EF00B1B6BE /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F129013CAA5EF00B1B6BE /* HelloWorldLayer.m */; };
-		016F129D13CAA6E600B1B6BE /* CocosParticleCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F129C13CAA6E600B1B6BE /* CocosParticleCreator.m */; };
+		016F129D13CAA6E600B1B6BE /* ParticlePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F129C13CAA6E600B1B6BE /* ParticlePreview.m */; };
 		016F12D513CAB8FC00B1B6BE /* ParticleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F12D413CAB8FC00B1B6BE /* ParticleList.m */; };
 		016F12D813CABD1F00B1B6BE /* CocosParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F12D713CABD1E00B1B6BE /* CocosParticle.m */; };
+		01BF92CF13CD77D0001FB5E5 /* ParticleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF92CE13CD77D0001FB5E5 /* ParticleEditor.m */; };
+		01BF930113CD922A001FB5E5 /* ParticleEditorComponentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF930013CD922A001FB5E5 /* ParticleEditorComponentManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -363,12 +365,16 @@
 		016F128F13CAA5EF00B1B6BE /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
 		016F129013CAA5EF00B1B6BE /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		016F129213CAA5EF00B1B6BE /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
-		016F129B13CAA6E600B1B6BE /* CocosParticleCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocosParticleCreator.h; sourceTree = "<group>"; };
-		016F129C13CAA6E600B1B6BE /* CocosParticleCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocosParticleCreator.m; sourceTree = "<group>"; };
+		016F129B13CAA6E600B1B6BE /* ParticlePreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticlePreview.h; sourceTree = "<group>"; };
+		016F129C13CAA6E600B1B6BE /* ParticlePreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticlePreview.m; sourceTree = "<group>"; };
 		016F12D313CAB8FC00B1B6BE /* ParticleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleList.h; sourceTree = "<group>"; };
 		016F12D413CAB8FC00B1B6BE /* ParticleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleList.m; sourceTree = "<group>"; };
 		016F12D613CABD1E00B1B6BE /* CocosParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocosParticle.h; sourceTree = "<group>"; };
 		016F12D713CABD1E00B1B6BE /* CocosParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocosParticle.m; sourceTree = "<group>"; };
+		01BF92CD13CD77CF001FB5E5 /* ParticleEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEditor.h; sourceTree = "<group>"; };
+		01BF92CE13CD77D0001FB5E5 /* ParticleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleEditor.m; sourceTree = "<group>"; };
+		01BF92FF13CD922A001FB5E5 /* ParticleEditorComponentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ParticleEditorComponentManager.h; sourceTree = "<group>"; };
+		01BF930013CD922A001FB5E5 /* ParticleEditorComponentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleEditorComponentManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,12 +441,16 @@
 				016F113813CAA5EC00B1B6BE /* Resources */,
 				016F114C13CAA5EC00B1B6BE /* libs */,
 				016F128513CAA5EF00B1B6BE /* Supporting Files */,
-				016F129B13CAA6E600B1B6BE /* CocosParticleCreator.h */,
-				016F129C13CAA6E600B1B6BE /* CocosParticleCreator.m */,
-				016F12D313CAB8FC00B1B6BE /* ParticleList.h */,
-				016F12D413CAB8FC00B1B6BE /* ParticleList.m */,
 				016F12D613CABD1E00B1B6BE /* CocosParticle.h */,
 				016F12D713CABD1E00B1B6BE /* CocosParticle.m */,
+				016F129B13CAA6E600B1B6BE /* ParticlePreview.h */,
+				016F129C13CAA6E600B1B6BE /* ParticlePreview.m */,
+				016F12D313CAB8FC00B1B6BE /* ParticleList.h */,
+				016F12D413CAB8FC00B1B6BE /* ParticleList.m */,
+				01BF92CD13CD77CF001FB5E5 /* ParticleEditor.h */,
+				01BF92CE13CD77D0001FB5E5 /* ParticleEditor.m */,
+				01BF92FF13CD922A001FB5E5 /* ParticleEditorComponentManager.h */,
+				01BF930013CD922A001FB5E5 /* ParticleEditorComponentManager.m */,
 			);
 			path = CocoParticle;
 			sourceTree = "<group>";
@@ -937,9 +947,11 @@
 				016F128B13CAA5EF00B1B6BE /* AppDelegate.m in Sources */,
 				016F128E13CAA5EF00B1B6BE /* RootViewController.m in Sources */,
 				016F129113CAA5EF00B1B6BE /* HelloWorldLayer.m in Sources */,
-				016F129D13CAA6E600B1B6BE /* CocosParticleCreator.m in Sources */,
+				016F129D13CAA6E600B1B6BE /* ParticlePreview.m in Sources */,
 				016F12D513CAB8FC00B1B6BE /* ParticleList.m in Sources */,
 				016F12D813CABD1F00B1B6BE /* CocosParticle.m in Sources */,
+				01BF92CF13CD77D0001FB5E5 /* ParticleEditor.m in Sources */,
+				01BF930113CD922A001FB5E5 /* ParticleEditorComponentManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

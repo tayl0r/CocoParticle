@@ -1,4 +1,4 @@
-#import "CocosParticleCreator.h"
+#import "ParticlePreview.h"
 
 @implementation CocosParticlePreview
 

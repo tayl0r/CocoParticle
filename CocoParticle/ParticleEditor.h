@@ -1,16 +1,13 @@
-//
-//  ParticleEditor.h
-//  CocoParticle
-//
-//  Created by Taylor Steil on 7/12/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
+#import "CocosParticle.h"
+#import "ParticleEditorComponentManager.h"
 
-@interface ParticleEditor : UIViewController {
-    
+@interface ParticleEditor : UITableViewController {
+    CocosParticle* m_cp;
+    ParticleEditorComponentManager* m_componentManager;
 }
+
+-(id) initWithParticle:(CocosParticle*)cp;
 
 @end

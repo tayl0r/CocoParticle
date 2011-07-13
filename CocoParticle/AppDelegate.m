@@ -10,7 +10,7 @@
 
 #import "AppDelegate.h"
 #import "GameConfig.h"
-#import "CocosParticleCreator.h"
+#import "ParticlePreview.h"
 #import "RootViewController.h"
 
 @implementation AppDelegate
@@ -106,11 +106,11 @@
     splitVC = [[UISplitViewController alloc] init];
     splitVC.viewControllers = [NSArray arrayWithObjects:leftNav, mainVC, nil];
     splitVC.delegate = self;
-
+    
 	// make the View Controller a child of the main window
 	[window addSubview: splitVC.view];
 	[window makeKeyAndVisible];
-	
+    
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.

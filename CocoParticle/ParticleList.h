@@ -6,5 +6,6 @@
 }
 
 -(void) editRows;
+-(void) addRowAtPath:(NSIndexPath*)path;
 
 @end
