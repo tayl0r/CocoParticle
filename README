@@ -1,0 +1,11 @@
+CocoParticle is intended to be used by Cocos2d app developers who want to create particles for their apps.
+
+Features / Todo:
+* supports every particle system property of Cocos2d
+* imports png files for use as the "particle"
+* exports particles as an objective-c class in a .m file, inheriting from the Cocos2d particle system class
+
+Right now the app is setup as a UISplitViewController where the left (small) pane is a native UIView where you manage the particles.
+The main pane is a Cocos2d view where the particle is displayed.
+
+I intend to use Dropbox to handle the importing & exporting of files. I haven't done any research to see if this is possible though.
