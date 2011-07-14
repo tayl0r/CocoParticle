@@ -373,7 +373,7 @@
 		016F12D713CABD1E00B1B6BE /* CocosParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocosParticle.m; sourceTree = "<group>"; };
 		01BF92CD13CD77CF001FB5E5 /* ParticleEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEditor.h; sourceTree = "<group>"; };
 		01BF92CE13CD77D0001FB5E5 /* ParticleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleEditor.m; sourceTree = "<group>"; };
-		01BF92FF13CD922A001FB5E5 /* ParticleEditorComponentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ParticleEditorComponentManager.h; sourceTree = "<group>"; };
+		01BF92FF13CD922A001FB5E5 /* ParticleEditorComponentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEditorComponentManager.h; sourceTree = "<group>"; };
 		01BF930013CD922A001FB5E5 /* ParticleEditorComponentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleEditorComponentManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1007,7 +1007,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1024,7 +1024,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

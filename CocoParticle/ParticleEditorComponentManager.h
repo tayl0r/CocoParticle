@@ -1,15 +1,26 @@
 #import <Foundation/Foundation.h>
 
-@interface ParticleEditorComponent : NSObject {
+@interface ParticleEditorComponent : NSObject <UITextFieldDelegate> {
     NSString* m_name;
     UIView* m_widget;
+    UITextField* m_widgetValue;
     CGFloat m_height;
+    NSString* m_componentType;
+    NSArray* m_segments;
 }
 @property (readonly) NSString* m_name;
+@property (readonly) NSString* m_componentType;
 @property (readonly) UIView* m_widget;
+@property (readonly) UITextField* m_widgetValue;
 @property (readwrite) CGFloat m_height;
 -(id) initWithName:(NSString*)name;
+-(void*) getValue;
+-(void) releaseWidget;
 -(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max;
+-(void) setWidgetValue:(CGFloat)value;
+-(void) sliderChanged:(UISlider*)slider;
+-(void) setTextInputWithDefault:(NSString*)text;
+-(void) setSegmentedControlWithChoices:(NSArray*)choices;
 @end
 
 
