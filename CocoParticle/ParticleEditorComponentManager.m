@@ -2,14 +2,12 @@
 
 @implementation ParticleEditorComponent
 
-@synthesize m_name, m_widget, m_height, m_widgetValue, m_componentType;
+@synthesize m_name, m_widget, m_height, m_widgetValue, m_cell;
 
 -(id) initWithName:(NSString*)name
 {
     if ((self = [super init])) {
         m_name = [name retain];
-        m_componentType = @"empty";
-        [m_componentType retain];
     }
     return self;
 }
@@ -45,16 +43,16 @@
     [m_widgetValue setDelegate:self];
 }
 
--(void) textViewDidEndEditing:(UITextField*)textView
+-(void) textFieldDidEndEditing:(UITextField*)textField
 {
-    if (textView == m_widgetValue) {
+    if (textField == m_widgetValue) {
         // update the widget with the new float value
-        CGFloat value = [textView.text floatValue];
-        if ([m_widget respondsToSelector:@selector(setValue:animated:)]) {
+        CGFloat value = [textField.text floatValue];
+        if ([m_widget isMemberOfClass:[UISlider class]]) {
             [(UISlider*)m_widget setValue:value animated:YES];
         }
     }
-    else if (textView == m_widget) {
+    else if (textField == m_widget) {
         // do nothing, we dont care if they edit this one
     }
 }
@@ -69,10 +67,6 @@
     tf.backgroundColor = [UIColor clearColor];
     tf.font = [UIFont systemFontOfSize:16.0];
     m_widget = [tf retain];
-
-    [m_componentType release];
-    m_componentType = @"textfield";
-    [m_componentType retain];
 }
 
 -(void) releaseWidget
@@ -92,10 +86,6 @@
     [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
     m_widget = [slider retain];
     
-    [m_componentType release];
-    m_componentType = @"slider";
-    [m_componentType retain];
-    
     [self setWidgetValue:0.0];
 }
 
@@ -113,11 +103,7 @@
     m_segments = [choices retain];
     UISegmentedControl* seg = [[[UISegmentedControl alloc] initWithItems:choices] autorelease];
     [seg setSelectedSegmentIndex:0];
-    m_widget = [seg retain];
-    
-    [m_componentType release];
-    m_componentType = @"segments";
-    [m_componentType retain];
+    m_widget = [seg retain];    
 }
 
 -(void) dealloc
@@ -133,8 +119,10 @@
     }
     [m_name release];
     m_name = nil;
-    [m_componentType release];
-    m_componentType = nil;
+    if (m_cell) {
+        [m_cell release];
+        m_cell = nil;
+    }
     [super dealloc];
 }
 

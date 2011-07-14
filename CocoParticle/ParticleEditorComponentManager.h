@@ -5,14 +5,14 @@
     UIView* m_widget;
     UITextField* m_widgetValue;
     CGFloat m_height;
-    NSString* m_componentType;
     NSArray* m_segments;
+    UITableViewCell* m_cell;
 }
 @property (readonly) NSString* m_name;
-@property (readonly) NSString* m_componentType;
-@property (readonly) UIView* m_widget;
-@property (readonly) UITextField* m_widgetValue;
+@property (readwrite, assign) UIView* m_widget;
+@property (readwrite, assign) UITextField* m_widgetValue;
 @property (readwrite) CGFloat m_height;
+@property (readwrite, retain) UITableViewCell* m_cell;
 -(id) initWithName:(NSString*)name;
 -(void*) getValue;
 -(void) releaseWidget;
