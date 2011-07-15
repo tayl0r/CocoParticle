@@ -1,7 +1,7 @@
 #import "cocos2d.h"
 
+#import "ParticleConfig.h"
 #import "ParticleList.h"
-#import "CocosParticle.h"
 #import "ParticleEditor.h"
 
 @implementation ParticleList
@@ -10,6 +10,24 @@
 {
     if ((self = [super initWithStyle:style])) {
         m_particles = [[NSMutableArray alloc] init];
+        
+        NSArray* savedParticles = [[NSUserDefaults standardUserDefaults] objectForKey:@"particles"];
+        if (savedParticles != nil) {
+            for (NSDictionary* d in savedParticles) {
+                ParticleEditor* pe = [[[ParticleEditor alloc] init] autorelease];
+                [pe readValuesFromDict:d];
+                [m_particles addObject:pe];
+            }
+        }
+        
+        NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
+        NSString* particlePath = [bundlePath stringByAppendingPathComponent:@"defaultParticles.plist"];
+        NSDictionary* defaultParticles = [[[NSDictionary alloc] initWithContentsOfFile:particlePath] autorelease];
+        for (NSDictionary* d in [defaultParticles objectForKey:@"particles"]) {
+            ParticleEditor* pe = [[[ParticleEditor alloc] init] autorelease];
+            [pe readValuesFromDict:d];
+            [m_particles addObject:pe];
+        }
         
         // left button
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRow)];
@@ -22,19 +40,32 @@
     return self;
 }
 
-// how else can we get the bounds of this view?
-/*-(void) viewDidAppear:(BOOL)animated
+-(void) viewDidAppear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveParticlesToDisk) name:SAVE_PARTICLES_TO_DISK object:nil];
     [super viewDidAppear:animated];
-    CGRect b = self.parentViewController.view.bounds;
-    CCLOG(@"%f %f %f %f", b.size.width, b.size.height, b.origin.x, b.origin.y);
-}*/
+    [[NSNotificationCenter defaultCenter] postNotificationName:PARTICLE_LIST_VIEW_DID_APPEAR object:self];
+    [self.tableView reloadData];
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SAVE_PARTICLES_TO_DISK object:nil];
+}
+
+-(void) saveParticlesToDisk
+{
+    NSMutableArray* particles = [[[NSMutableArray alloc] initWithCapacity:[m_particles count]] autorelease];
+    for (ParticleEditor* p in m_particles) {
+        [particles addObject:[p toDict]];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:particles forKey:@"particles"];
+}
 
 // open up the new view with the selected particle
 -(void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    ParticleEditor* newVC = [[[ParticleEditor alloc] initWithParticle:[m_particles objectAtIndex:indexPath.row]] autorelease];
-    [self.navigationController pushViewController:newVC animated:YES];
+    [self.navigationController pushViewController:[m_particles objectAtIndex:indexPath.row] animated:YES];
 }
 
 // add a new particle to the end of the list
@@ -47,8 +78,8 @@
 -(void) addRowAtPath:(NSIndexPath*)path
 {
     NSArray* paths = [NSArray arrayWithObject:path];
-    CocosParticle* cp = [[[CocosParticle alloc] init] autorelease];
-    [m_particles insertObject:cp atIndex:0];
+    ParticleEditor* pe = [[[ParticleEditor alloc] init] autorelease];
+    [m_particles insertObject:pe atIndex:0];
     [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationLeft];
 }
 
@@ -112,8 +143,8 @@
     }
     else {
         // else use the real name
-        CocosParticle* cp = [m_particles objectAtIndex:row];
-        cell.textLabel.text = cp.m_name;
+        ParticleEditor* pe = [m_particles objectAtIndex:row];
+        cell.textLabel.text = [pe getName];
     }
     return cell;
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0128F1CE13D02E35003DC2F3 /* ParticleEditorSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0128F1CD13D02E35003DC2F3 /* ParticleEditorSection.m */; };
+		0128F1D213D02E40003DC2F3 /* ParticleEditorComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0128F1D113D02E3F003DC2F3 /* ParticleEditorComponent.m */; };
+		0128F1D413D03573003DC2F3 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 0128F1D313D03573003DC2F3 /* fire.png */; };
+		0128F1D713D048BF003DC2F3 /* defaultParticles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0128F1D613D048BF003DC2F3 /* defaultParticles.plist */; };
 		016F112813CAA5EC00B1B6BE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F112713CAA5EC00B1B6BE /* QuartzCore.framework */; };
 		016F112A13CAA5EC00B1B6BE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F112913CAA5EC00B1B6BE /* OpenGLES.framework */; };
 		016F112C13CAA5EC00B1B6BE /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F112B13CAA5EC00B1B6BE /* OpenAL.framework */; };
@@ -124,12 +128,18 @@
 		016F129113CAA5EF00B1B6BE /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F129013CAA5EF00B1B6BE /* HelloWorldLayer.m */; };
 		016F129D13CAA6E600B1B6BE /* ParticlePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F129C13CAA6E600B1B6BE /* ParticlePreview.m */; };
 		016F12D513CAB8FC00B1B6BE /* ParticleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F12D413CAB8FC00B1B6BE /* ParticleList.m */; };
-		016F12D813CABD1F00B1B6BE /* CocosParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F12D713CABD1E00B1B6BE /* CocosParticle.m */; };
 		01BF92CF13CD77D0001FB5E5 /* ParticleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF92CE13CD77D0001FB5E5 /* ParticleEditor.m */; };
 		01BF930113CD922A001FB5E5 /* ParticleEditorComponentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF930013CD922A001FB5E5 /* ParticleEditorComponentManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0128F1CC13D02E35003DC2F3 /* ParticleEditorSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEditorSection.h; sourceTree = "<group>"; };
+		0128F1CD13D02E35003DC2F3 /* ParticleEditorSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleEditorSection.m; sourceTree = "<group>"; };
+		0128F1D013D02E3F003DC2F3 /* ParticleEditorComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEditorComponent.h; sourceTree = "<group>"; };
+		0128F1D113D02E3F003DC2F3 /* ParticleEditorComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleEditorComponent.m; sourceTree = "<group>"; };
+		0128F1D313D03573003DC2F3 /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fire.png; path = Resources/fire.png; sourceTree = "<group>"; };
+		0128F1D613D048BF003DC2F3 /* defaultParticles.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = defaultParticles.plist; sourceTree = "<group>"; };
+		0128F1D813D0508A003DC2F3 /* ParticleConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleConfig.h; sourceTree = "<group>"; };
 		016F112313CAA5EC00B1B6BE /* CocoParticle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoParticle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016F112713CAA5EC00B1B6BE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		016F112913CAA5EC00B1B6BE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -369,8 +379,6 @@
 		016F129C13CAA6E600B1B6BE /* ParticlePreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticlePreview.m; sourceTree = "<group>"; };
 		016F12D313CAB8FC00B1B6BE /* ParticleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleList.h; sourceTree = "<group>"; };
 		016F12D413CAB8FC00B1B6BE /* ParticleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleList.m; sourceTree = "<group>"; };
-		016F12D613CABD1E00B1B6BE /* CocosParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocosParticle.h; sourceTree = "<group>"; };
-		016F12D713CABD1E00B1B6BE /* CocosParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocosParticle.m; sourceTree = "<group>"; };
 		01BF92CD13CD77CF001FB5E5 /* ParticleEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEditor.h; sourceTree = "<group>"; };
 		01BF92CE13CD77D0001FB5E5 /* ParticleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleEditor.m; sourceTree = "<group>"; };
 		01BF92FF13CD922A001FB5E5 /* ParticleEditorComponentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEditorComponentManager.h; sourceTree = "<group>"; };
@@ -441,8 +449,7 @@
 				016F113813CAA5EC00B1B6BE /* Resources */,
 				016F114C13CAA5EC00B1B6BE /* libs */,
 				016F128513CAA5EF00B1B6BE /* Supporting Files */,
-				016F12D613CABD1E00B1B6BE /* CocosParticle.h */,
-				016F12D713CABD1E00B1B6BE /* CocosParticle.m */,
+				0128F1D813D0508A003DC2F3 /* ParticleConfig.h */,
 				016F129B13CAA6E600B1B6BE /* ParticlePreview.h */,
 				016F129C13CAA6E600B1B6BE /* ParticlePreview.m */,
 				016F12D313CAB8FC00B1B6BE /* ParticleList.h */,
@@ -451,6 +458,10 @@
 				01BF92CE13CD77D0001FB5E5 /* ParticleEditor.m */,
 				01BF92FF13CD922A001FB5E5 /* ParticleEditorComponentManager.h */,
 				01BF930013CD922A001FB5E5 /* ParticleEditorComponentManager.m */,
+				0128F1CC13D02E35003DC2F3 /* ParticleEditorSection.h */,
+				0128F1CD13D02E35003DC2F3 /* ParticleEditorSection.m */,
+				0128F1D013D02E3F003DC2F3 /* ParticleEditorComponent.h */,
+				0128F1D113D02E3F003DC2F3 /* ParticleEditorComponent.m */,
 			);
 			path = CocoParticle;
 			sourceTree = "<group>";
@@ -458,6 +469,8 @@
 		016F113813CAA5EC00B1B6BE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0128F1D613D048BF003DC2F3 /* defaultParticles.plist */,
+				0128F1D313D03573003DC2F3 /* fire.png */,
 				016F113913CAA5EC00B1B6BE /* Default.png */,
 				016F113B13CAA5EC00B1B6BE /* fps_images.png */,
 				016F113D13CAA5EC00B1B6BE /* Icon-72.png */,
@@ -839,6 +852,8 @@
 				016F114613CAA5EC00B1B6BE /* Icon.png in Resources */,
 				016F114813CAA5EC00B1B6BE /* Icon@2x.png in Resources */,
 				016F114B13CAA5EC00B1B6BE /* iTunesArtwork in Resources */,
+				0128F1D413D03573003DC2F3 /* fire.png in Resources */,
+				0128F1D713D048BF003DC2F3 /* defaultParticles.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -949,9 +964,10 @@
 				016F129113CAA5EF00B1B6BE /* HelloWorldLayer.m in Sources */,
 				016F129D13CAA6E600B1B6BE /* ParticlePreview.m in Sources */,
 				016F12D513CAB8FC00B1B6BE /* ParticleList.m in Sources */,
-				016F12D813CABD1F00B1B6BE /* CocosParticle.m in Sources */,
 				01BF92CF13CD77D0001FB5E5 /* ParticleEditor.m in Sources */,
 				01BF930113CD922A001FB5E5 /* ParticleEditorComponentManager.m in Sources */,
+				0128F1CE13D02E35003DC2F3 /* ParticleEditorSection.m in Sources */,
+				0128F1D213D02E40003DC2F3 /* ParticleEditorComponent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

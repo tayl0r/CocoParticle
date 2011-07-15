@@ -8,6 +8,7 @@
 
 #import "cocos2d.h"
 
+#import "ParticleConfig.h"
 #import "AppDelegate.h"
 #import "GameConfig.h"
 #import "ParticlePreview.h"
@@ -145,6 +146,7 @@
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application {
+    [[NSNotificationCenter defaultCenter] postNotificationName:SAVE_PARTICLES_TO_DISK object:self];
 	[[CCDirector sharedDirector] stopAnimation];
 }
 
@@ -153,6 +155,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    [[NSNotificationCenter defaultCenter] postNotificationName:SAVE_PARTICLES_TO_DISK object:self];
 	CCDirector *director = [CCDirector sharedDirector];
 	[[director openGLView] removeFromSuperview];
 	[splitVC release];

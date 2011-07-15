@@ -1,13 +1,16 @@
 #import <Foundation/Foundation.h>
 
-#import "CocosParticle.h"
 #import "ParticleEditorComponentManager.h"
 
 @interface ParticleEditor : UITableViewController {
-    CocosParticle* m_cp;
     ParticleEditorComponentManager* m_componentManager;
+    ParticleEditorComponent* m_name;
 }
 
--(id) initWithParticle:(CocosParticle*)cp;
+-(void) loadEditor;
+-(void) unloadEditor;
+-(NSString*) getName;
+-(NSDictionary*) toDict;
+-(void) readValuesFromDict:(NSDictionary*)dict;
 
 @end
