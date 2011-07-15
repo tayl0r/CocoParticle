@@ -1,32 +1,41 @@
 #import "ParticleEditorComponentManager.h"
 
+#define cpComponentTypeFloat 0
+#define cpComponentTypeSegmentedInt 1
+#define cpComponentTypeString 2
+
+#define cpChoiceNames 0
+#define cpChoiceValues 1
+
 @implementation ParticleEditorComponent
 
-@synthesize m_name, m_widget, m_height, m_widgetValue, m_cell;
+@synthesize m_name, m_widget, m_height, m_widgetValue, m_cell, m_type, m_key;
 
--(id) initWithName:(NSString*)name
+-(id) initWithName:(NSString*)name key:(NSString*)key
 {
     if ((self = [super init])) {
         m_name = [name retain];
+        m_key = [key retain];
     }
     return self;
 }
 
--(void*) getValue
+-(id) getValue
 {
     if (m_widget) {
-        if ([m_widget isMemberOfClass:[UITextField class]]) {
+        if (m_type == cpComponentTypeString) {
             return [(UITextField*)m_widget text];
         }
-        else if ([m_widget isMemberOfClass:[UISlider class]]) {
-            return m_widgetValue.text;
+        else if (m_type == cpComponentTypeFloat) {
+            return [NSNumber numberWithFloat:[m_widgetValue.text floatValue]];
         }
-        else if ([m_widget isMemberOfClass:[UISegmentedControl class]]) {
+        else if (m_type == cpComponentTypeSegmentedInt) {
             NSInteger row = [(UISegmentedControl*)m_widget selectedSegmentIndex];
             if (row == UISegmentedControlNoSegment) {
                 return nil;
             }
-            return [NSArray arrayWithObjects:[NSNumber numberWithInteger:row], [m_segments objectAtIndex:row], nil];
+            NSArray* choiceValues = [m_segments objectAtIndex:cpChoiceValues];
+            return [choiceValues objectAtIndex:row];
         }
     }
     return nil;
@@ -60,6 +69,7 @@
 -(void) setTextInputWithDefault:(NSString*)text
 {
     [self releaseWidget];
+    m_type = cpComponentTypeString;
     UITextField* tf = [[[UITextField alloc] init] autorelease];
     tf.text = text;
     [tf setDelegate:self];
@@ -80,6 +90,7 @@
 -(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max
 {
     [self releaseWidget];
+    m_type = cpComponentTypeFloat;
     UISlider* slider = [[[UISlider alloc] init] autorelease];
     slider.minimumValue = min;
     slider.maximumValue = max;
@@ -101,7 +112,9 @@
         [m_segments release];
     }
     m_segments = [choices retain];
-    UISegmentedControl* seg = [[[UISegmentedControl alloc] initWithItems:choices] autorelease];
+    m_type = cpComponentTypeSegmentedInt;
+    NSArray* choiceNames = [choices objectAtIndex:cpChoiceNames];
+    UISegmentedControl* seg = [[[UISegmentedControl alloc] initWithItems:choiceNames] autorelease];
     [seg setSelectedSegmentIndex:0];
     m_widget = [seg retain];    
 }
@@ -119,6 +132,8 @@
     }
     [m_name release];
     m_name = nil;
+    [m_key release];
+    m_key = nil;
     if (m_cell) {
         [m_cell release];
         m_cell = nil;
@@ -131,7 +146,7 @@
 
 @implementation ParticleEditorSection
 
-@synthesize m_name;
+@synthesize m_name, m_components;
 
 -(id) initWithName:(NSString*)name
 {
@@ -152,9 +167,9 @@
     return [m_components objectAtIndex:idx];
 }
 
--(ParticleEditorComponent*) addComponentWithName:(NSString*)name
+-(ParticleEditorComponent*) addComponentWithName:(NSString*)name key:(NSString *)key
 {
-    ParticleEditorComponent* component = [[[ParticleEditorComponent alloc] initWithName:name] autorelease];
+    ParticleEditorComponent* component = [[[ParticleEditorComponent alloc] initWithName:name key:key] autorelease];
     [m_components addObject:component];
     return component;
 }
@@ -196,6 +211,20 @@
     ParticleEditorSection* section = [[[ParticleEditorSection alloc] initWithName:name] autorelease];
     [m_sections addObject:section];
     return section;
+}
+
+-(id) createPlist
+{
+    NSMutableDictionary* d = [[[NSMutableDictionary alloc] init] autorelease];
+    
+    for (ParticleEditorSection* section in m_sections) {
+        for (ParticleEditorComponent* component in section.m_components) {
+            [d setObject:[component getValue] forKey:component.m_key];
+        }
+    }
+    
+    id plist = [NSPropertyListSerialization dataFromPropertyList:d format:NSPropertyListXMLFormat_v1_0 errorDescription:nil];
+    return plist;
 }
 
 -(void) dealloc
