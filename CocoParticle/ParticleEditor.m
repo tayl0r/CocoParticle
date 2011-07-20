@@ -164,48 +164,48 @@
     ParticleEditorSection* startcolor = [m_componentManager addSectionWithName:@"Start Color"];
     
     ParticleEditorComponent* startred = [startcolor addComponentWithName:@"Red" key:@"startColorRed"];
-    [startred setSliderWithMin:0 andMax:1];
+    [startred setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     ParticleEditorComponent* startredv = [startcolor addComponentWithName:@"Red Variance" key:@"startColorVarianceRed"];
-    [startredv setSliderWithMin:0 andMax:1];
+    [startredv setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
     ParticleEditorComponent* startblue = [startcolor addComponentWithName:@"Blue" key:@"startColorBlue"];
-    [startblue setSliderWithMin:0 andMax:1];
+    [startblue setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     ParticleEditorComponent* startbluev = [startcolor addComponentWithName:@"Blue Variance" key:@"startColorVarianceBlue"];
-    [startbluev setSliderWithMin:0 andMax:1];
+    [startbluev setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
     ParticleEditorComponent* startgreen = [startcolor addComponentWithName:@"Green" key:@"startColorGreen"];
-    [startgreen setSliderWithMin:0 andMax:1];
+    [startgreen setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     ParticleEditorComponent* startgreenv = [startcolor addComponentWithName:@"Green Variance" key:@"startColorVarianceGreen"];
-    [startgreenv setSliderWithMin:0 andMax:1];
+    [startgreenv setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
     ParticleEditorComponent* startalpha = [startcolor addComponentWithName:@"Alpha" key:@"startColorAlpha"];
-    [startalpha setSliderWithMin:0 andMax:1];
+    [startalpha setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     ParticleEditorComponent* startalphav = [startcolor addComponentWithName:@"Alpha Variance" key:@"startColorVarianceAlpha"];
-    [startalphav setSliderWithMin:0 andMax:1];
+    [startalphav setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
     
     // end color
     ParticleEditorSection* endcolor = [m_componentManager addSectionWithName:@"End Color"];
     
     ParticleEditorComponent* endred = [endcolor addComponentWithName:@"Red" key:@"endColorRed"];
-    [endred setSliderWithMin:0 andMax:1];
+    [endred setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     ParticleEditorComponent* endredv = [endcolor addComponentWithName:@"Red Variance" key:@"endColorVarianceRed"];
-    [endredv setSliderWithMin:0 andMax:1];
+    [endredv setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
     ParticleEditorComponent* endblue = [endcolor addComponentWithName:@"Blue" key:@"endColorBlue"];
-    [endblue setSliderWithMin:0 andMax:1];
+    [endblue setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     ParticleEditorComponent* endbluev = [endcolor addComponentWithName:@"Blue Variance" key:@"endColorVarianceBlue"];
-    [endbluev setSliderWithMin:0 andMax:1];
+    [endbluev setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
     ParticleEditorComponent* endgreen = [endcolor addComponentWithName:@"Green" key:@"endColorGreen"];
-    [endgreen setSliderWithMin:0 andMax:1];
+    [endgreen setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     ParticleEditorComponent* endgreenv = [endcolor addComponentWithName:@"Green Variance" key:@"endColorVarianceGreen"];
-    [endgreenv setSliderWithMin:0 andMax:1];
+    [endgreenv setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
     ParticleEditorComponent* endalpha = [endcolor addComponentWithName:@"Alpha" key:@"endColorAlpha"];
-    [endalpha setSliderWithMin:0 andMax:1];
+    [endalpha setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     ParticleEditorComponent* endalphav = [endcolor addComponentWithName:@"Alpha Variance" key:@"endColorVarianceAlpha"];
-    [endalphav setSliderWithMin:0 andMax:1];
+    [endalphav setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
     
     ParticleEditorSection* texture = [m_componentManager addSectionWithName:@"Texture"];

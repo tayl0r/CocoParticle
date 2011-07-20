@@ -13,6 +13,11 @@
     CGFloat m_height;
     NSArray* m_segments;
     UITableViewCell* m_cell;
+    BOOL m_scaleFlag;
+    float m_floatValue;
+    float m_maxFloat;
+    float m_minFloat;
+    float m_lastSliderValue;
 }
 
 @property (readonly) NSInteger m_type;
@@ -29,8 +34,13 @@
 -(void) setValue:(NSObject*)obj;
 -(void) releaseWidget;
 -(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max;
+-(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max andScaleFlag:(BOOL)scaleFlag;
 -(void) setWidgetValue:(CGFloat)value;
+
 -(void) sliderChanged:(UISlider*)slider;
+-(void) updateSlider:(float)value;
+-(void) updateSliderDone:(UISlider*)slider;
+
 -(void) setTextInputWithDefault:(NSString*)text;
 -(void) setSegmentedControlWithChoices:(NSArray*)choices;
 -(void) segmentedControlChanged:(UISegmentedControl*)seg;

@@ -1,3 +1,5 @@
+#import "cocos2d.h"
+
 #import "ParticleEditorComponent.h"
 
 #define cpComponentTypeFloat 0
@@ -36,7 +38,7 @@
             return [(UITextField*)m_widget text];
         }
         else if (m_type == cpComponentTypeFloat) {
-            return [NSNumber numberWithFloat:[m_widgetValue.text floatValue]];
+            return [NSNumber numberWithFloat:m_floatValue];
         }
         else if (m_type == cpComponentTypeSegmentedInt) {
             NSInteger row = [(UISegmentedControl*)m_widget selectedSegmentIndex];
@@ -57,8 +59,15 @@
             [(UITextField*)m_widget setText:(NSString*)obj];
         }
         else if (m_type == cpComponentTypeFloat) {
-            [(UISlider*)m_widget setValue:[(NSNumber*)obj floatValue] animated:YES];
-            [(UITextField*)m_widgetValue setText:[(NSNumber*)obj stringValue]];
+            [self updateSlider:[(NSNumber*)obj floatValue]];
+            [self updateSliderDone:(UISlider*)m_widget];
+            
+            /*if (m_scaleFlag) {
+                [(UISlider*)m_widget setValue:[(NSNumber*)obj floatValue] animated:YES];
+            }
+            m_floatValue = [(NSNumber*)obj floatValue];
+            m_lastSliderValue = m_floatValue;
+            [(UITextField*)m_widgetValue setText:[(NSNumber*)obj stringValue]];*/
         }
         else if (m_type == cpComponentTypeSegmentedInt) {
             NSInteger row = [(NSNumber*)obj integerValue];
@@ -73,6 +82,7 @@
         [m_widgetValue release];
         m_widgetValue = nil;
     }
+    m_floatValue = value;
     m_widgetValue = [[UITextField alloc] init];
     m_widgetValue.text = [NSString stringWithFormat:@"%.2f", value];
     [m_widgetValue setDelegate:self];
@@ -82,9 +92,9 @@
 {
     if (textField == m_widgetValue) {
         // update the widget with the new float value
-        CGFloat value = [textField.text floatValue];
+        m_floatValue = [textField.text floatValue];
         if ([m_widget isMemberOfClass:[UISlider class]]) {
-            [(UISlider*)m_widget setValue:value animated:YES];
+            [(UISlider*)m_widget setValue:m_floatValue animated:YES];
         }
     }
     else if (textField == m_widget) {
@@ -116,12 +126,32 @@
 
 -(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max
 {
+    [self setSliderWithMin:min andMax:max andScaleFlag:NO];
+}
+
+-(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max andScaleFlag:(BOOL)scaleFlag
+{
     [self releaseWidget];
+    m_scaleFlag = scaleFlag;
     m_type = cpComponentTypeFloat;
     UISlider* slider = [[[UISlider alloc] init] autorelease];
-    slider.minimumValue = min;
-    slider.maximumValue = max;
-    [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
+    m_maxFloat = max;
+    m_minFloat = min;
+    if (m_scaleFlag) {
+        slider.minimumValue = min;
+        slider.maximumValue = max;
+        [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
+    }
+    else {
+        float minmax = (max - min) / 30;
+        slider.minimumValue = -1 * minmax;
+        slider.maximumValue = minmax;
+        m_lastSliderValue = 0;
+        [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
+        [slider addTarget:self action:@selector(updateSliderDone:) forControlEvents:UIControlEventTouchUpInside];
+        [slider addTarget:self action:@selector(updateSliderDone:) forControlEvents:UIControlEventTouchUpOutside];
+        //[slider addTarget:self action:@selector(updateSliderStart:) forControlEvents:UIControlEventTouchDown];
+    }
     m_widget = [slider retain];
     
     [self setWidgetValue:0.0];
@@ -129,7 +159,52 @@
 
 -(void) sliderChanged:(UISlider*)slider
 {
-    m_widgetValue.text = [NSString stringWithFormat:@"%.2f", slider.value];
+    if (m_scaleFlag) {
+        [self updateSlider:slider.value];
+    }
+    else {
+        float diff = slider.value - m_lastSliderValue;
+        if (fabs(slider.value) > slider.maximumValue/2) {
+            // if we're adjusted by more than half the max value, increase the diff
+            float ratio = fabs(slider.value) / slider.maximumValue;
+            float newSliderValue = slider.value*(ratio*5);
+            diff = newSliderValue - m_lastSliderValue;
+            m_lastSliderValue = newSliderValue;
+            CCLOG(@"%f %f %f %f %f", ratio, diff, slider.value, m_lastSliderValue, m_floatValue);
+        }
+        else {
+            m_lastSliderValue = slider.value;
+        }
+        [self updateSlider:m_floatValue + diff];
+    }
+}
+
+-(void) updateSliderDone:(UISlider*)slider
+{
+    [self sliderChanged:slider];
+    if (m_scaleFlag == NO) {
+        [slider setValue:0 animated:YES];
+        m_lastSliderValue = 0;
+    }
+}
+
+-(void) updateSlider:(float)value
+{
+    //UISlider* slider = (UISlider*)m_widget;
+    if (m_scaleFlag) {
+        // slider is full scale flag so just set the text widget value to the slider value
+        m_floatValue = value;
+    }
+    else {
+        m_floatValue = value;
+        if (m_floatValue > m_maxFloat) {
+            m_floatValue = m_maxFloat;
+        }
+        else if (m_floatValue < m_minFloat) {
+            m_floatValue = m_minFloat;
+        }
+    }
+    m_widgetValue.text = [NSString stringWithFormat:@"%.2f", m_floatValue];
     [self anyValueChanged];
 }
 
