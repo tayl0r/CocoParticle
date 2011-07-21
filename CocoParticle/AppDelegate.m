@@ -1,11 +1,3 @@
-//
-//  AppDelegate.m
-//  CocoParticle
-//
-//  Created by Taylor Steil on 7/10/11.
-//  Copyright __MyCompanyName__ 2011. All rights reserved.
-//
-
 #import "cocos2d.h"
 
 #import "ParticleConfig.h"
@@ -13,6 +5,8 @@
 #import "GameConfig.h"
 #import "ParticlePreview.h"
 #import "RootViewController.h"
+#import "DropBoxVC.h"
+#import "ParticleList.h"
 
 @implementation AppDelegate
 
@@ -98,14 +92,24 @@
     //mainVC.view.autoresizesSubviews = YES;
     //mainVC.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
 	
-    leftVC = [[[ParticleList alloc] initWithStyle:UITableViewStylePlain] autorelease];
-    UINavigationController* leftNav = [[[UINavigationController alloc] initWithRootViewController:leftVC] autorelease];
-    //leftVC.view.autoresizesSubviews = YES;
-    //leftVC.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
+    // left view controller is a tab bar controller
+    leftVC = [[UITabBarController alloc] init];
+
+    [self setupDropboxSession];
+    DropBoxVC* dbvc = [[[DropBoxVC alloc] init] autorelease];
+    [dbvc setTabBarItem:[[[UITabBarItem alloc] initWithTitle:@"Dropbox" image:[UIImage imageNamed:@"db.png"] tag:1] autorelease]];
+    
+    ParticleList* plvc = [[[ParticleList alloc] initWithStyle:UITableViewStylePlain] autorelease];
+    [plvc setTabBarItem:[[[UITabBarItem alloc] initWithTitle:@"Particle List" image:[UIImage imageNamed:@"applications_app.png"] tag:2] autorelease]];
+    UINavigationController* plnav = [[[UINavigationController alloc] initWithRootViewController:plvc] autorelease];
+
+    [leftVC setViewControllers:[NSArray arrayWithObjects:dbvc, plnav, nil] animated:YES];
+    [leftVC setSelectedViewController:plnav];
+    
     
     // setup the split view controller
     splitVC = [[UISplitViewController alloc] init];
-    splitVC.viewControllers = [NSArray arrayWithObjects:leftNav, mainVC, nil];
+    splitVC.viewControllers = [NSArray arrayWithObjects:leftVC, mainVC, nil];
     splitVC.delegate = self;
     
 	// make the View Controller a child of the main window
@@ -167,7 +171,31 @@
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
 }
 
+-(void) setupDropboxSession
+{
+	// Set these variables before launching the app
+    NSString* consumerKey = @"3psw00bshiv8qp4";
+	NSString* consumerSecret = @"d2mxtbf35y3uzda";
+	
+	DBSession* session = [[DBSession alloc] initWithConsumerKey:consumerKey consumerSecret:consumerSecret];
+	session.delegate = self; // DBSessionDelegate methods allow you to handle re-authenticating
+	[DBSession setSharedSession:session];
+    [session release];
+    
+    m_dbRestClient = [[DBRestClient alloc] initWithSession:session];
+    [m_dbRestClient createFolder:COCOS_PARTICLE_CLOUD_FOLDER];
+}
+
+- (void)sessionDidReceiveAuthorizationFailure:(DBSession*)session {
+	DBLoginController* loginController = [[DBLoginController new] autorelease];
+	[loginController presentFromController:splitVC];
+}
+
 - (void)dealloc {
+    if (m_dbRestClient) {
+        [m_dbRestClient release];
+        m_dbRestClient = nil;
+    }
 	[super dealloc];
 }
 

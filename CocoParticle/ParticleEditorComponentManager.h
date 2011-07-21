@@ -4,6 +4,7 @@
 @interface ParticleEditorComponentManager : NSObject {
     NSMutableArray* m_sections;
     BOOL m_isVisible;
+    NSDate* m_createdDate;
 }
 
 -(void) setIsVisible:(BOOL)flag;

@@ -2,6 +2,7 @@
 
 @interface ParticleList : UITableViewController {
     NSMutableArray* m_particles;
+    UITabBarController* m_tabBar;
 }
 
 -(void) editRows;

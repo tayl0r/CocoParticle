@@ -9,6 +9,7 @@
 -(id) initWithStyle:(UITableViewStyle)style
 {
     if ((self = [super initWithStyle:style])) {
+        self.title = @"Particle List";
         m_particles = [[NSMutableArray alloc] init];
         
         NSArray* savedParticles = [[NSUserDefaults standardUserDefaults] objectForKey:@"particles"];
@@ -45,7 +46,7 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName:PARTICLE_LIST_VIEW_DID_APPEAR object:self];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:PARTICLE_LIST_VIEW_DID_APPEAR object:self];
     [self.tableView reloadData];
 }
 
@@ -58,7 +59,9 @@
 {
     NSMutableArray* particles = [[[NSMutableArray alloc] initWithCapacity:[m_particles count]] autorelease];
     for (ParticleEditor* p in m_particles) {
-        [particles addObject:[p toDict]];
+        NSDictionary* pDict = [p toDict];
+        [particles addObject:pDict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SAVE_PARTICLE_TO_CLOUD object:nil userInfo:pDict];
     }
     [[NSUserDefaults standardUserDefaults] setObject:particles forKey:@"particles"];
 }
@@ -104,6 +107,8 @@
 {
     [self.view release];
     [m_particles release];
+    [m_tabBar release];
+    m_tabBar = nil;
     [super dealloc];
 }
 
@@ -184,7 +189,7 @@
     }
 }
 
-// both view controllers that are part of the UISplitViewController must implement this
+// all view controllers that are part of the UISplitViewController must implement this
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return YES;

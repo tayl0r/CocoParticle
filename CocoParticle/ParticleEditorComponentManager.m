@@ -12,6 +12,7 @@
         m_sections = [[NSMutableArray alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(anyValueChanged) name:ANY_VALUE_CHANGED object:nil];
         m_isVisible = NO;
+        m_createdDate = [[NSDate date] retain];
     }
     return self;
 }
@@ -50,6 +51,14 @@
             }
         }
     }
+    [d setObject:m_createdDate forKey:@"createdDate"];
+    
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:@"yyyyMMdd-HHmmss"];
+    NSString* dateString = [dateFormatter stringFromDate:m_createdDate];
+    
+    NSString* uniqueName = [NSString stringWithFormat:@"%@-%@", [d objectForKey:@"name"], dateString];
+    [d setObject:uniqueName forKey:@"uniqueName"];
     return d;
 }
 
@@ -63,6 +72,8 @@
 {
     [m_sections release];
     m_sections = nil;
+    [m_createdDate release];
+    m_createdDate = nil;
     [super dealloc];
 }
 
@@ -72,14 +83,15 @@
         for (ParticleEditorComponent* component in section.m_components) {
             NSString* componentKey = component.m_key;
             NSObject* dictValue = [dict objectForKey:componentKey];
-            if ([componentKey isEqualToString:@"startColorRed"]) {
-                CCLOG(@"YES");
-            }
             if (dictValue == nil) {
                 continue;
             }
             [component setValue:dictValue];
         }
+    }
+    if ([dict objectForKey:@"createdDate"]) {
+        [m_createdDate release];
+        m_createdDate = [dict objectForKey:@"createdDate"];
     }
     [self anyValueChanged];
 }
