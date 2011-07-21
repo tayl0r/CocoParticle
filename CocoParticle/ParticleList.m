@@ -36,13 +36,14 @@
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editRows)] autorelease];
         
         //self.navigationItem.leftBarButtonItem.enabled = NO;
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveParticlesToDisk) name:SAVE_PARTICLES_TO_DISK object:nil];
     }
     return self;
 }
 
 -(void) viewDidAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveParticlesToDisk) name:SAVE_PARTICLES_TO_DISK object:nil];
     [super viewDidAppear:animated];
     [[NSNotificationCenter defaultCenter] postNotificationName:PARTICLE_LIST_VIEW_DID_APPEAR object:self];
     [self.tableView reloadData];
@@ -50,7 +51,7 @@
 
 -(void) viewDidDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SAVE_PARTICLES_TO_DISK object:nil];
+    //[[NSNotificationCenter defaultCenter] removeObserver:self name:SAVE_PARTICLES_TO_DISK object:nil];
 }
 
 -(void) saveParticlesToDisk

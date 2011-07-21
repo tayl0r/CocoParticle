@@ -59,13 +59,13 @@
             [(UITextField*)m_widget setText:(NSString*)obj];
         }
         else if (m_type == cpComponentTypeFloat) {
+            if (m_scaleFlag) {
+                [(UISlider*)m_widget setValue:[(NSNumber*)obj floatValue] animated:YES];
+            }
             [self updateSlider:[(NSNumber*)obj floatValue]];
             [self updateSliderDone:(UISlider*)m_widget];
             
-            /*if (m_scaleFlag) {
-                [(UISlider*)m_widget setValue:[(NSNumber*)obj floatValue] animated:YES];
-            }
-            m_floatValue = [(NSNumber*)obj floatValue];
+            /*m_floatValue = [(NSNumber*)obj floatValue];
             m_lastSliderValue = m_floatValue;
             [(UITextField*)m_widgetValue setText:[(NSNumber*)obj stringValue]];*/
         }
@@ -131,12 +131,23 @@
 
 -(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max andScaleFlag:(BOOL)scaleFlag
 {
+    [self setSliderWithMin:min andMax:max andScaleFlag:scaleFlag andRespectMin:YES];
+}
+
+-(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max andRespectMin:(BOOL)respectMinFlag
+{
+    [self setSliderWithMin:min andMax:max andScaleFlag:NO andRespectMin:respectMinFlag];
+}
+
+-(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max andScaleFlag:(BOOL)scaleFlag andRespectMin:(BOOL)respectMinFlag
+{
     [self releaseWidget];
     m_scaleFlag = scaleFlag;
     m_type = cpComponentTypeFloat;
     UISlider* slider = [[[UISlider alloc] init] autorelease];
     m_maxFloat = max;
     m_minFloat = min;
+    m_respectMin = respectMinFlag;
     if (m_scaleFlag) {
         slider.minimumValue = min;
         slider.maximumValue = max;
@@ -170,7 +181,6 @@
             float newSliderValue = slider.value*(ratio*5);
             diff = newSliderValue - m_lastSliderValue;
             m_lastSliderValue = newSliderValue;
-            CCLOG(@"%f %f %f %f %f", ratio, diff, slider.value, m_lastSliderValue, m_floatValue);
         }
         else {
             m_lastSliderValue = slider.value;
@@ -197,11 +207,10 @@
     }
     else {
         m_floatValue = value;
-        if (m_floatValue > m_maxFloat) {
-            m_floatValue = m_maxFloat;
-        }
-        else if (m_floatValue < m_minFloat) {
-            m_floatValue = m_minFloat;
+        if (m_respectMin) {
+            if (m_floatValue < m_minFloat) {
+                m_floatValue = m_minFloat;
+            }
         }
     }
     m_widgetValue.text = [NSString stringWithFormat:@"%.2f", m_floatValue];

@@ -1,3 +1,5 @@
+#import "cocos2d.h"
+
 #import "ParticleConfig.h"
 #import "ParticleEditorComponentManager.h"
 #import "ParticleEditorComponent.h"
@@ -70,6 +72,9 @@
         for (ParticleEditorComponent* component in section.m_components) {
             NSString* componentKey = component.m_key;
             NSObject* dictValue = [dict objectForKey:componentKey];
+            if ([componentKey isEqualToString:@"startColorRed"]) {
+                CCLOG(@"YES");
+            }
             if (dictValue == nil) {
                 continue;
             }

@@ -38,13 +38,14 @@
     [self drawParticle];
     
     // schedule a new particle every <life>
-    NSNumber* life = [m_pdata objectForKey:@"particleLifespan"];
-    [self schedule:@selector(drawParticle) interval:[life floatValue]];
+    NSNumber* particleLife = [m_pdata objectForKey:@"particleLifespan"];
+    NSNumber* systemDuration = [m_pdata objectForKey:@"duration"];
+    [self schedule:@selector(drawParticle) interval:[particleLife floatValue] + [systemDuration floatValue]];
 }
 
 -(void) drawParticle
 {
-    CCParticleSystemQuad* p = [[[CCParticleSystemQuad alloc] initWithDictionary:m_pdata] autorelease];
+    TSParticleSystemQuad* p = [[[TSParticleSystemQuad alloc] initWithDictionary:m_pdata] autorelease];
     [self addChild:p];
     CGSize size = [[CCDirector sharedDirector] winSize];
     p.position = ccp(size.width/2, size.height/2);

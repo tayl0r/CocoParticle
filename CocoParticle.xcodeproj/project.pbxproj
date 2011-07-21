@@ -128,6 +128,7 @@
 		016F129113CAA5EF00B1B6BE /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F129013CAA5EF00B1B6BE /* HelloWorldLayer.m */; };
 		016F129D13CAA6E600B1B6BE /* ParticlePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F129C13CAA6E600B1B6BE /* ParticlePreview.m */; };
 		016F12D513CAB8FC00B1B6BE /* ParticleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F12D413CAB8FC00B1B6BE /* ParticleList.m */; };
+		017F33C613D7F2710049604C /* TSParticleSystemQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = 017F33C513D7F2710049604C /* TSParticleSystemQuad.m */; };
 		01BF92CF13CD77D0001FB5E5 /* ParticleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF92CE13CD77D0001FB5E5 /* ParticleEditor.m */; };
 		01BF930113CD922A001FB5E5 /* ParticleEditorComponentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF930013CD922A001FB5E5 /* ParticleEditorComponentManager.m */; };
 /* End PBXBuildFile section */
@@ -379,6 +380,8 @@
 		016F129C13CAA6E600B1B6BE /* ParticlePreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticlePreview.m; sourceTree = "<group>"; };
 		016F12D313CAB8FC00B1B6BE /* ParticleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleList.h; sourceTree = "<group>"; };
 		016F12D413CAB8FC00B1B6BE /* ParticleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleList.m; sourceTree = "<group>"; };
+		017F33C413D7F2710049604C /* TSParticleSystemQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSParticleSystemQuad.h; path = ../TSParticleSystemQuad.h; sourceTree = "<group>"; };
+		017F33C513D7F2710049604C /* TSParticleSystemQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSParticleSystemQuad.m; path = ../TSParticleSystemQuad.m; sourceTree = "<group>"; };
 		01BF92CD13CD77CF001FB5E5 /* ParticleEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEditor.h; sourceTree = "<group>"; };
 		01BF92CE13CD77D0001FB5E5 /* ParticleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleEditor.m; sourceTree = "<group>"; };
 		01BF92FF13CD922A001FB5E5 /* ParticleEditorComponentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEditorComponentManager.h; sourceTree = "<group>"; };
@@ -452,6 +455,8 @@
 				0128F1D813D0508A003DC2F3 /* ParticleConfig.h */,
 				016F129B13CAA6E600B1B6BE /* ParticlePreview.h */,
 				016F129C13CAA6E600B1B6BE /* ParticlePreview.m */,
+				017F33C413D7F2710049604C /* TSParticleSystemQuad.h */,
+				017F33C513D7F2710049604C /* TSParticleSystemQuad.m */,
 				016F12D313CAB8FC00B1B6BE /* ParticleList.h */,
 				016F12D413CAB8FC00B1B6BE /* ParticleList.m */,
 				01BF92CD13CD77CF001FB5E5 /* ParticleEditor.h */,
@@ -968,6 +973,7 @@
 				01BF930113CD922A001FB5E5 /* ParticleEditorComponentManager.m in Sources */,
 				0128F1CE13D02E35003DC2F3 /* ParticleEditorSection.m in Sources */,
 				0128F1D213D02E40003DC2F3 /* ParticleEditorComponent.m in Sources */,
+				017F33C613D7F2710049604C /* TSParticleSystemQuad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

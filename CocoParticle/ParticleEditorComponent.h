@@ -17,6 +17,7 @@
     float m_floatValue;
     float m_maxFloat;
     float m_minFloat;
+    BOOL m_respectMin;
     float m_lastSliderValue;
 }
 
@@ -35,6 +36,8 @@
 -(void) releaseWidget;
 -(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max;
 -(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max andScaleFlag:(BOOL)scaleFlag;
+-(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max andRespectMin:(BOOL)respectMinFlag;
+-(void) setSliderWithMin:(CGFloat)min andMax:(CGFloat)max andScaleFlag:(BOOL)scaleFlag andRespectMin:(BOOL)respectMinFlag;
 -(void) setWidgetValue:(CGFloat)value;
 
 -(void) sliderChanged:(UISlider*)slider;

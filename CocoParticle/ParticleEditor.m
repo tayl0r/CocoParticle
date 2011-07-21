@@ -56,20 +56,23 @@
     m_name = name;
     
     ParticleEditorComponent* maxParticles = [base addComponentWithName:@"Max Particles" key:@"maxParticles"];
-    [maxParticles setSliderWithMin:0 andMax:10000];
+    [maxParticles setSliderWithMin:0 andMax:5000 andRespectMin:YES];
     
     ParticleEditorComponent* type = [base addComponentWithName:@"Particle Type" key:@"emitterType"];
     NSArray* typeNames = [NSArray arrayWithObjects:@"Gravity", @"Radius", nil];
     NSArray* typeValues = [NSArray arrayWithObjects:[NSNumber numberWithInt:kCCParticleModeGravity], [NSNumber numberWithInt:kCCParticleModeRadius], nil];
     [type setSegmentedControlWithChoices:[NSArray arrayWithObjects:typeNames, typeValues, nil]];
     
-    ParticleEditorComponent* duration = [base addComponentWithName:@"Duration" key:@"duration"];
-    [duration setSliderWithMin:0 andMax:50];
+    ParticleEditorComponent* duration = [base addComponentWithName:@"System Duration" key:@"duration"];
+    [duration setSliderWithMin:0 andMax:50 andRespectMin:YES];
     
-    ParticleEditorComponent* life = [base addComponentWithName:@"Life" key:@"particleLifespan"];
-    [life setSliderWithMin:0 andMax:50];
-    ParticleEditorComponent* lifev = [base addComponentWithName:@"Life Variance" key:@"particleLifespanVariance"];
-    [lifev setSliderWithMin:0 andMax:50];
+    ParticleEditorComponent* life = [base addComponentWithName:@"Particle Lifespan" key:@"particleLifespan"];
+    [life setSliderWithMin:0 andMax:50 andRespectMin:YES];
+    ParticleEditorComponent* lifev = [base addComponentWithName:@"Particle Lifespan Variance" key:@"particleLifespanVariance"];
+    [lifev setSliderWithMin:0 andMax:50 andRespectMin:YES];
+    
+    ParticleEditorComponent* eRate = [base addComponentWithName:@"Emission Rate" key:@"emissionRate"];
+    [eRate setSliderWithMin:0 andMax:1000 andRespectMin:YES];
     
     
     // gravity mode
@@ -83,34 +86,34 @@
     ParticleEditorComponent* speed = [gravity addComponentWithName:@"Speed" key:@"speed"];
     [speed setSliderWithMin:-1000 andMax:1000];
     ParticleEditorComponent* speedv = [gravity addComponentWithName:@"Speed Variance" key:@"speedVariance"];
-    [speedv setSliderWithMin:-1000 andMax:1000];
+    [speedv setSliderWithMin:0 andMax:1000 andRespectMin:YES];
     
     ParticleEditorComponent* tanga = [gravity addComponentWithName:@"Tangential Acceleration" key:@"tangentialAcceleration"];
     [tanga setSliderWithMin:-1000 andMax:1000];
     ParticleEditorComponent* tangav = [gravity addComponentWithName:@"Tangential Acceleration Variance" key:@"tangentialAccelVariance"];
-    [tangav setSliderWithMin:-1000 andMax:1000];
+    [tangav setSliderWithMin:0 andMax:1000 andRespectMin:YES];
     
     ParticleEditorComponent* rada = [gravity addComponentWithName:@"Radial Acceleration" key:@"radialAcceleration"];
     [rada setSliderWithMin:-1000 andMax:1000];
     ParticleEditorComponent* radav = [gravity addComponentWithName:@"Radial Acceleration Variance" key:@"radialAccelVariance"];
-    [radav setSliderWithMin:-1000 andMax:1000];
+    [radav setSliderWithMin:0 andMax:1000 andRespectMin:YES];
     
     
     // radius mode
     ParticleEditorSection* radius = [m_componentManager addSectionWithName:@"Radius Mode"];
     
     ParticleEditorComponent* startradius = [radius addComponentWithName:@"Max Radius" key:@"maxRadius"];
-    [startradius setSliderWithMin:0 andMax:1000];
+    [startradius setSliderWithMin:0 andMax:1000 andRespectMin:YES];
     ParticleEditorComponent* startradiusv = [radius addComponentWithName:@"Max Radius Variance" key:@"maxRadiusVariance"];
-    [startradiusv setSliderWithMin:0 andMax:1000];
+    [startradiusv setSliderWithMin:0 andMax:1000 andRespectMin:YES];
     
     ParticleEditorComponent* endradius = [radius addComponentWithName:@"Min Radius" key:@"minRadius"];
-    [endradius setSliderWithMin:0 andMax:1000];
+    [endradius setSliderWithMin:0 andMax:1000 andRespectMin:YES];
     
     ParticleEditorComponent* rps = [radius addComponentWithName:@"Rotation Per Second" key:@"rotatePerSecond"];
     [rps setSliderWithMin:-360 andMax:360];
     ParticleEditorComponent* rpsv = [radius addComponentWithName:@"Rotation Per Second Variance" key:@"rotatePerSecondVariance"];
-    [rpsv setSliderWithMin:-360 andMax:360];        
+    [rpsv setSliderWithMin:0 andMax:360 andRespectMin:YES];
     
     
     // position
@@ -119,12 +122,12 @@
     ParticleEditorComponent* startPositionX = [position addComponentWithName:@"X" key:@"sourcePositionx"];
     [startPositionX setSliderWithMin:-500 andMax:500];
     ParticleEditorComponent* startPositionXV = [position addComponentWithName:@"X Variance" key:@"sourcePositionVariancex"];
-    [startPositionXV setSliderWithMin:-500 andMax:500];
+    [startPositionXV setSliderWithMin:0 andMax:500 andRespectMin:YES];
     
     ParticleEditorComponent* startPositionY = [position addComponentWithName:@"Y" key:@"sourcePositiony"];
     [startPositionY setSliderWithMin:-500 andMax:500];
     ParticleEditorComponent* startPositionYV = [position addComponentWithName:@"Y Variance" key:@"sourcePositionVariancey"];
-    [startPositionYV setSliderWithMin:-500 andMax:500];
+    [startPositionYV setSliderWithMin:0 andMax:500 andRespectMin:YES];
     
     
     // spin & angle
@@ -133,36 +136,39 @@
     ParticleEditorComponent* angle = [spinangle addComponentWithName:@"Angle" key:@"angle"];
     [angle setSliderWithMin:-360 andMax:360];
     ParticleEditorComponent* anglev = [spinangle addComponentWithName:@"Angle Variance" key:@"angleVariance"];
-    [anglev setSliderWithMin:-360 andMax:360];
+    [anglev setSliderWithMin:0 andMax:360 andRespectMin:YES];
     
     ParticleEditorComponent* startspin = [spinangle addComponentWithName:@"Start Spin" key:@"rotationStart"];
     [startspin setSliderWithMin:-1000 andMax:1000];
     ParticleEditorComponent* startspinv = [spinangle addComponentWithName:@"Start Spin Variance" key:@"rotationStartVariance"];
-    [startspinv setSliderWithMin:-1000 andMax:1000];
+    [startspinv setSliderWithMin:0 andMax:1000 andRespectMin:YES];
     
     ParticleEditorComponent* endspin = [spinangle addComponentWithName:@"End Spin" key:@"rotationEnd"];
     [endspin setSliderWithMin:-1000 andMax:1000];
     ParticleEditorComponent* endspinv = [spinangle addComponentWithName:@"End Spin Variance" key:@"rotationEndVariance"];
-    [endspinv setSliderWithMin:-1000 andMax:1000];
+    [endspinv setSliderWithMin:0 andMax:1000 andRespectMin:YES];
     
     
     // size
     ParticleEditorSection* size = [m_componentManager addSectionWithName:@"Size"];
     
     ParticleEditorComponent* startsize = [size addComponentWithName:@"Start Size" key:@"startParticleSize"];
-    [startsize setSliderWithMin:0 andMax:200];
+    [startsize setSliderWithMin:0 andMax:200 andRespectMin:YES];
     ParticleEditorComponent* startsizev = [size addComponentWithName:@"Start Size Variance" key:@"startParticleSizeVariance"];
-    [startsizev setSliderWithMin:0 andMax:200];
+    [startsizev setSliderWithMin:0 andMax:200 andRespectMin:YES];
     
     ParticleEditorComponent* endsize = [size addComponentWithName:@"End Size" key:@"finishParticleSize"];
-    [endsize setSliderWithMin:0 andMax:200];
+    [endsize setSliderWithMin:0 andMax:200 andRespectMin:YES];
     ParticleEditorComponent* endsizev = [size addComponentWithName:@"End Size Variance" key:@"finishParticleSizeVariance"];
-    [endsizev setSliderWithMin:0 andMax:200];
+    [endsizev setSliderWithMin:0 andMax:200 andRespectMin:YES];
     
     
     // start color
     ParticleEditorSection* startcolor = [m_componentManager addSectionWithName:@"Start Color"];
     
+    ParticleEditorComponent* allParticlesSameColor = [startcolor addComponentWithName:@"All Particles Same Color" key:@"allParticlesSameColor"];
+    [allParticlesSameColor setSegmentedControlWithChoices:[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"No", @"Yes", nil], [NSArray arrayWithObjects:[NSNumber numberWithBool:NO], [NSNumber numberWithBool:YES], nil], nil]];
+
     ParticleEditorComponent* startred = [startcolor addComponentWithName:@"Red" key:@"startColorRed"];
     [startred setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     ParticleEditorComponent* startredv = [startcolor addComponentWithName:@"Red Variance" key:@"startColorVarianceRed"];
@@ -184,27 +190,30 @@
     [startalphav setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
     
-    // end color
+    // finish color
     ParticleEditorSection* endcolor = [m_componentManager addSectionWithName:@"End Color"];
     
-    ParticleEditorComponent* endred = [endcolor addComponentWithName:@"Red" key:@"endColorRed"];
+    ParticleEditorComponent* endcolorToggle = [endcolor addComponentWithName:@"Enabled" key:@"finishColorEnabled"];
+    [endcolorToggle setSegmentedControlWithChoices:[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"Off", @"On", nil], [NSArray arrayWithObjects:[NSNumber numberWithBool:NO], [NSNumber numberWithBool:YES], nil], nil]];
+    
+    ParticleEditorComponent* endred = [endcolor addComponentWithName:@"Red" key:@"finishColorRed"];
     [endred setSliderWithMin:0 andMax:1 andScaleFlag:YES];
-    ParticleEditorComponent* endredv = [endcolor addComponentWithName:@"Red Variance" key:@"endColorVarianceRed"];
+    ParticleEditorComponent* endredv = [endcolor addComponentWithName:@"Red Variance" key:@"finishColorVarianceRed"];
     [endredv setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
-    ParticleEditorComponent* endblue = [endcolor addComponentWithName:@"Blue" key:@"endColorBlue"];
+    ParticleEditorComponent* endblue = [endcolor addComponentWithName:@"Blue" key:@"finishColorBlue"];
     [endblue setSliderWithMin:0 andMax:1 andScaleFlag:YES];
-    ParticleEditorComponent* endbluev = [endcolor addComponentWithName:@"Blue Variance" key:@"endColorVarianceBlue"];
+    ParticleEditorComponent* endbluev = [endcolor addComponentWithName:@"Blue Variance" key:@"finishColorVarianceBlue"];
     [endbluev setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
-    ParticleEditorComponent* endgreen = [endcolor addComponentWithName:@"Green" key:@"endColorGreen"];
+    ParticleEditorComponent* endgreen = [endcolor addComponentWithName:@"Green" key:@"finishColorGreen"];
     [endgreen setSliderWithMin:0 andMax:1 andScaleFlag:YES];
-    ParticleEditorComponent* endgreenv = [endcolor addComponentWithName:@"Green Variance" key:@"endColorVarianceGreen"];
+    ParticleEditorComponent* endgreenv = [endcolor addComponentWithName:@"Green Variance" key:@"finishColorVarianceGreen"];
     [endgreenv setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
-    ParticleEditorComponent* endalpha = [endcolor addComponentWithName:@"Alpha" key:@"endColorAlpha"];
+    ParticleEditorComponent* endalpha = [endcolor addComponentWithName:@"Alpha" key:@"finishColorAlpha"];
     [endalpha setSliderWithMin:0 andMax:1 andScaleFlag:YES];
-    ParticleEditorComponent* endalphav = [endcolor addComponentWithName:@"Alpha Variance" key:@"endColorVarianceAlpha"];
+    ParticleEditorComponent* endalphav = [endcolor addComponentWithName:@"Alpha Variance" key:@"finishColorVarianceAlpha"];
     [endalphav setSliderWithMin:0 andMax:1 andScaleFlag:YES];
     
     
