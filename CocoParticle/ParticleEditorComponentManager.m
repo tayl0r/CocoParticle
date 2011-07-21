@@ -91,7 +91,7 @@
     }
     if ([dict objectForKey:@"createdDate"]) {
         [m_createdDate release];
-        m_createdDate = [dict objectForKey:@"createdDate"];
+        m_createdDate = [[dict objectForKey:@"createdDate"] retain];
     }
     [self anyValueChanged];
 }

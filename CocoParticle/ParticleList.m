@@ -21,13 +21,16 @@
             }
         }
         
-        NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
-        NSString* particlePath = [bundlePath stringByAppendingPathComponent:@"defaultParticles.plist"];
-        NSDictionary* defaultParticles = [[[NSDictionary alloc] initWithContentsOfFile:particlePath] autorelease];
-        for (NSDictionary* d in [defaultParticles objectForKey:@"particles"]) {
-            ParticleEditor* pe = [[[ParticleEditor alloc] init] autorelease];
-            [pe readValuesFromDict:d];
-            [m_particles addObject:pe];
+        if (!savedParticles || [savedParticles count] == 0) {
+            NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
+            for (NSString* filename in [NSArray arrayWithObjects:@"fireworks.plist", @"galaxy.plist", nil])
+            {
+                NSString* particlePath = [bundlePath stringByAppendingPathComponent:filename];
+                NSDictionary* pData = [[[NSDictionary alloc] initWithContentsOfFile:particlePath] autorelease];
+                ParticleEditor* pe = [[[ParticleEditor alloc] init] autorelease];
+                [pe readValuesFromDict:pData];
+                [m_particles addObject:pe];
+            }
         }
         
         // left button
