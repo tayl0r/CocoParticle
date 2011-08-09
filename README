@@ -3,24 +3,15 @@ CocoParticle is intended to be used by Cocos2d app developers who want to create
 Features:
 * supports every particle system property of Cocos2d
 * imports png files for use as the "particle"
-* exports particles as a plist, which you can use to create a Cocos2d particle system (exporting not quite done yet)
+* exports particles as a plist to your Drop Box, which you can use to create a Cocos2d particle system
 
 Right now the app is setup as a UISplitViewController where the left (small) pane is a native UIView where you manage the particles.
 The main pane is a Cocos2d view where the particle is displayed.
 
-I intend to use Dropbox to handle the importing & exporting of files. I haven't done any research to see if this is possible though.
-
-To do:
-* still some weirdness with how it schedules the particle preview timer
-
 * bug with particle list name, it reads it from a different row for some reason when you create a new particle, but when you refresh the list it picks up the correct name, gotta dig into it
-
-* sliders are kind of hard to use since the range of values is so big, need to try and fix this somehow.
-
-one idea is to set the sliders to a reasonable range (like -50 to 50) then after you take your finger off the slider, add the slider value to the real value and then set the slider back to 0, so you would just keep using the same slider over and over again to get to the value you wanted. it would be slower making huge changes but it would be a lot better making fine tune adjustments, which i think is a good trade off.
 
 * need a randomize button
 
 * need better default values
 
-* for some reason the color variance makes things rainbow. i would want every particle to be the same random color, not every particle a different random color
+* added support for "all particles the same color", so if you have a random color and this is turned on, instead of each particle being a random color, they will all be the same random color
