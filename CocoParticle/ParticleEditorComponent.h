@@ -19,6 +19,7 @@
     float m_minFloat;
     BOOL m_respectMin;
     float m_lastSliderValue;
+    BOOL m_locked;
 }
 
 @property (readonly) NSInteger m_type;
@@ -47,5 +48,7 @@
 -(void) setTextInputWithDefault:(NSString*)text;
 -(void) setSegmentedControlWithChoices:(NSArray*)choices;
 -(void) segmentedControlChanged:(UISegmentedControl*)seg;
+
+-(void) randomize;
 
 @end

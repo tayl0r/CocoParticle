@@ -146,6 +146,7 @@
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
+    CCLOGERROR(@"MEMORY WARNING!! ################");
 	[[CCDirector sharedDirector] purgeCachedData];
 }
 

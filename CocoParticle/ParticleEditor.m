@@ -8,6 +8,11 @@
 {
     if ((self == [super initWithStyle:UITableViewStyleGrouped])) {
         [self loadEditor];
+        self.title = @"Editor";
+
+        // right button
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Random" style:UIBarButtonItemStylePlain target:self action:@selector(randomize)] autorelease];
+        //self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(editRows)] autorelease];
     }
     return self;
 }
@@ -36,6 +41,11 @@
         [m_componentManager release];
         m_componentManager = nil;
     }
+}
+
+-(void) randomize
+{
+    [m_componentManager randomize];
 }
 
 -(void) loadEditor

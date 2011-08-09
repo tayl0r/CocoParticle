@@ -83,6 +83,7 @@
         [m_dbRestClient release];
         m_dbRestClient = nil;
     }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SAVE_PARTICLE_TO_CLOUD object:nil];
     [super dealloc];
 }
 

@@ -11,6 +11,7 @@
     if ((self = [super initWithStyle:style])) {
         self.title = @"Particle List";
         m_particles = [[NSMutableArray alloc] init];
+        m_singleEdit = NO;
         
         NSArray* savedParticles = [[NSUserDefaults standardUserDefaults] objectForKey:@"particles"];
         if (savedParticles != nil) {
@@ -75,8 +76,7 @@
     [self.navigationController pushViewController:[m_particles objectAtIndex:indexPath.row] animated:YES];
 }
 
-// add a new particle to the end of the list
-// for some reason apple really doesn't want you to add it to the beginning of the list
+// add a new particle to the end
 -(void) addRow
 {
     [self addRowAtPath:[NSIndexPath indexPathForRow:[m_particles count] inSection:0]];
@@ -86,7 +86,8 @@
 {
     NSArray* paths = [NSArray arrayWithObject:path];
     ParticleEditor* pe = [[[ParticleEditor alloc] init] autorelease];
-    [m_particles insertObject:pe atIndex:0];
+    [m_particles insertObject:pe atIndex:[m_particles count]];
+    //[m_particles insertObject:pe atIndex:0];
     [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationLeft];
 }
 
@@ -112,6 +113,7 @@
     [m_particles release];
     [m_tabBar release];
     m_tabBar = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SAVE_PARTICLES_TO_DISK object:nil];
     [super dealloc];
 }
 
@@ -120,10 +122,32 @@
     return 1;
 }
 
+-(void) setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:YES];
+    if (editing) {
+        self.navigationItem.leftBarButtonItem.enabled = NO;
+    }
+    else {
+        self.navigationItem.leftBarButtonItem.enabled = YES;
+    }
+}
+
+-(void) tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    m_singleEdit = YES;
+}
+
+-(void) tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    m_singleEdit = NO;
+}
+
 -(NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
     // if we're in edit mode, we have the dummy particle at the end of the list
-    if (self.editing) {
+    if (self.editing && self.tableView.editing) {
         return [m_particles count] + 1;
     }
     else {

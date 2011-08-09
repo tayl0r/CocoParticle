@@ -47,7 +47,7 @@
         for (ParticleEditorComponent* component in section.m_components) {
             id value = [component getValue];
             if (value) {
-                [d setObject:[component getValue] forKey:component.m_key];
+                [d setObject:[[value retain] autorelease] forKey:component.m_key];
             }
         }
     }
@@ -74,6 +74,7 @@
     m_sections = nil;
     [m_createdDate release];
     m_createdDate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ANY_VALUE_CHANGED object:nil];
     [super dealloc];
 }
 
@@ -103,6 +104,19 @@
     }
     NSDictionary* pdata = [self toDict];
     [[NSNotificationCenter defaultCenter] postNotificationName:CREATE_PARTICLE_MESSAGE object:self userInfo:pdata];
+}
+
+-(void) randomize
+{
+    BOOL wasVisible = m_isVisible;
+    [self setIsVisible:NO];
+    for (ParticleEditorSection* section in m_sections) {
+        for (ParticleEditorComponent* component in section.m_components) {
+            [component randomize];
+        }
+    }
+    [self setIsVisible:wasVisible];
+    [self anyValueChanged];
 }
 
 @end

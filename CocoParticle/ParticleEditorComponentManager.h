@@ -15,5 +15,6 @@
 -(id) toPropertyList;
 -(void) anyValueChanged;
 -(void) readValuesFromDict:(NSDictionary*)dict;
+-(void) randomize;
 
 @end

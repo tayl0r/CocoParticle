@@ -20,6 +20,7 @@
     if ((self = [super init])) {
         m_name = [name retain];
         m_key = [key retain];
+        m_locked = NO;
     }
     return self;
 }
@@ -27,6 +28,7 @@
 -(void) anyValueChanged
 {
 #ifdef createParticleOnChange
+    //CCLOG(@"anyValueChanged %@", m_name);
     [[NSNotificationCenter defaultCenter] postNotificationName:ANY_VALUE_CHANGED object:self];
 #endif
 }
@@ -50,6 +52,27 @@
         }
     }
     return nil;
+}
+
+-(void) randomize
+{
+    //CCLOG(@"randomizing %@", m_name);
+    if (m_locked) {
+        return;
+    }
+    if (m_widget) {
+        if (m_type == cpComponentTypeString) {
+            
+        }
+        else if (m_type == cpComponentTypeFloat) {
+            float val = CCRANDOM_0_1() * (m_maxFloat - m_minFloat) + m_minFloat;
+            [self setValue:[NSNumber numberWithFloat:val]];
+        }
+        else if (m_type == cpComponentTypeSegmentedInt) {
+            int val = arc4random() % [m_segments count];
+            [self setValue:[NSNumber numberWithInt:val]];
+        }
+    }
 }
 
 -(void) setValue:(NSObject*)obj

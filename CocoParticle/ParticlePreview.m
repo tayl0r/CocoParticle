@@ -55,12 +55,15 @@
 
 - (void) dealloc
 {
+    CCLOGERROR(@"particle preview getting dealloc'd....");
     //[m_activeParticles release];
     //m_activeParticles = nil;
+    [self unscheduleAllSelectors];
     if (m_pdata) {
         [m_pdata release];
         m_pdata = nil;
     }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CREATE_PARTICLE_MESSAGE object:nil];
 	[super dealloc];
 }
 
